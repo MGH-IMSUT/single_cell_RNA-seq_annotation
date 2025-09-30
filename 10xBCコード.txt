@@ -1,0 +1,70 @@
+cd/ your directory
+fastx_trimmer -f 1 -l 16 -Q 33 -i Read1.fastq -o 10x-1.fastq
+
+fastx_trimmer -f 37 -l 62 -Q 33 -i Read2.fastq -o BC.fastq
+
+fastx_trimmer -f 32 -l 36 -Q 33 -i Read2.fastq -o ATTAA.fastq
+
+
+python
+
+def merge_fastq_files(forward_file, reverse_file, output_file):
+    with open(forward_file, 'r') as forward, open(reverse_file, 'r') as reverse, open(output_file, 'w') as output:
+        while True:
+            forward_line1 = forward.readline().strip()
+            forward_line2 = forward.readline().strip()
+            forward_line3 = forward.readline().strip()
+            forward_line4 = forward.readline().strip()
+            
+            reverse_line1 = reverse.readline().strip()
+            reverse_line2 = reverse.readline().strip()
+            reverse_line3 = reverse.readline().strip()
+            reverse_line4 = reverse.readline().strip()
+            
+            if not forward_line1 or not reverse_line1:
+                # Reached the end of one of the files
+                break
+            
+            # Write merged lines to output file
+            output.write(f"{forward_line1}\n{forward_line2+reverse_line2}\n{forward_line3}\n{forward_line4+reverse_line4}\n")
+            #output.write(f"{reverse_line1}\n{reverse_line2}\n{reverse_line3}\n{reverse_line4}\n")
+
+forward_file = 'ATTAA.fastq'
+reverse_file = '10x-1.fastq'
+output_file = '10x-2.fastq'
+
+merge_fastq_files(forward_file, reverse_file, output_file)
+
+python
+
+def merge_fastq_files(forward_file, reverse_file, output_file):
+    with open(forward_file, 'r') as forward, open(reverse_file, 'r') as reverse, open(output_file, 'w') as output:
+        while True:
+            forward_line1 = forward.readline().strip()
+            forward_line2 = forward.readline().strip()
+            forward_line3 = forward.readline().strip()
+            forward_line4 = forward.readline().strip()
+            
+            reverse_line1 = reverse.readline().strip()
+            reverse_line2 = reverse.readline().strip()
+            reverse_line3 = reverse.readline().strip()
+            reverse_line4 = reverse.readline().strip()
+            
+            if not forward_line1 or not reverse_line1:
+                # Reached the end of one of the files
+                break
+            
+            # Write merged lines to output file
+            output.write(f"{forward_line1}\n{forward_line2+reverse_line2}\n{forward_line3}\n{forward_line4+reverse_line4}\n")
+            #output.write(f"{reverse_line1}\n{reverse_line2}\n{reverse_line3}\n{reverse_line4}\n")
+
+forward_file = '10x-2.fastq'
+reverse_file = 'BC.fastq'
+output_file = '10xBC.fastq'
+
+merge_fastq_files(forward_file, reverse_file, output_file)
+
+
+bartender_extractor_com -f 10xBC.fastq -o 10xBC -q ? -p ATTAA[37]CCTAG -m 2
+
+bartender_single_com -f 10xBC_barcode.txt -o 10xBC -d 5
