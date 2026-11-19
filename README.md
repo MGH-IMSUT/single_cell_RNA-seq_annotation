@@ -64,27 +64,6 @@ Step 2 — Concatenate corresponding FASTQ sequences
 The original workflow concatenates the ATTAA.fastq sequence/quality fields with those from 10x-1.fastq to make 10x-2.fastq, then concatenates 10x-2.fastq with BC.fastq to make 10xBC.fastq. The record identifiers from the first input are retained. Example equivalent Python implementation:
 from itertools import zip_longest
 
-def fastq_records(path):
-    with open(path) as fh:
-        while True:
-            record = [fh.readline() for _ in range(4)]
-            if not record[0]:
-                return
-            if any(not line for line in record):
-                raise ValueError(f"Incomplete FASTQ record: {path}")
-            yield [line.rstrip("\n\r") for line in record]
-
-def concatenate_fastq(left_path, right_path, output_path):
-    with open(output_path, "w") as out:
-        for left, right in zip_longest(fastq_records(left_path), fastq_records(right_path)):
-            if left is None or right is None:
-                raise ValueError("FASTQ files have different numbers of records")
-            if left[0].split()[0] != right[0].split()[0]:
-                raise ValueError("FASTQ record identifiers do not match")
-            if len(left[1]) != len(left[3]) or len(right[1]) != len(right[3]):
-                raise ValueError("Sequence and quality lengths differ")
-            out.write(f"{left[0]}\n{left[1]}{right[1]}\n{left[2]}\n{left[3]}{right[3]}\n")
-
 concatenate_fastq("ATTAA.fastq", "10x-1.fastq", "10x-2.fastq")
 concatenate_fastq("10x-2.fastq", "BC.fastq", "10xBC.fastq")
 This is an explanatory rewrite of the merging logic rather than a separately validated program. The original source code is in 10xBCコード.txt.
