@@ -50,7 +50,7 @@ The following operating system and software versions were used for this analysis
 - Other tested operating systems: None documented
 Versions of NumPy, FASTX-Toolkit, and Bartender remain to be documented. The checked R environment does not have edgeR installed; whether an alternate R environment was used for the edgeR-dependent analysis is not established. The fastx_env and treeenv environments used for the separate CPTracer pipeline are not listed here.
 Hardware
-Hardware requirements and typical execution time have not been documented. Memory requirements may depend on the number of cells and distinct barcodes; ex1_clone_census.py creates a dense cells-by-barcodes array and a barcodes-by-barcodes co-occurrence matrix.
+Hardware requirements and typical execution time have not been documented. Memory requirements may depend on the number of cells and distinct barcodes; ex1_clone_census.py creates a dense cells-by-barcodes array and a barcodes-by-barcodes co-occurrence matrix.No additional installation is required for the code provided in this repository, apart from the third-party software listed under System requirements.
 
 
 Part III — 10x barcode and lineage barcode processing
