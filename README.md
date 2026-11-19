@@ -119,6 +119,8 @@ The script:
 7. Reports clone size and barcode-related statistics, including barcode counts, mean/median barcodes per cell, relative-to-maximum UMI statistics, and the minimum barcode detection rate.
 The thresholds are specified as constants in the script and were not re-optimized here.
 
+The analysis of the provided mini dataset (Read1.fastq.gz, Read2.fastq.gz) completes within a few minutes on a standard desktop computer.
+
 
 Part V — Citation
 Please cite the associated study when using these materials:
