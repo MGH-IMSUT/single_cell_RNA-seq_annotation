@@ -123,7 +123,5 @@ The thresholds are specified as constants in the script and were not re-optimize
 Part V — Citation
 Please cite the associated study when using these materials:
 
-https://www.biorxiv.org/content/10.1101/2025.02.23.639689v2
 
-Repository: https://github.com/MGH-IMSUT/single_cell_RNA-seq_annotation
 
